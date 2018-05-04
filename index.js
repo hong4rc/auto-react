@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const api = require('./lib/api');
 const log = require('./lib/log');
+const timer = require('./lib/timer');
 
 const DEFAULT_PORT = 1997;
 const DEFAULT_TIME_IDLING = 60000;
