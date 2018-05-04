@@ -1,0 +1,16 @@
+{
+    "name": "auto-react",
+    "description": "Auto like(or love) in your newsfeed Fb.",
+    "author": "Hongarc",
+    "scripts": {
+        "start": "node index.js",
+        "heroku-postbuild": "eslint **/* --fix"
+    },
+    "dependencies": {
+        "console-control-strings": "^1.1.0",
+        "eslint": "^4.19.1",
+        "express": "^4.16.3",
+        "request": "^2.85.0",
+        "request-myself": "^0.0.2"
+    }
+}
