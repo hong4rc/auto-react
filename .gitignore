@@ -8,3 +8,5 @@ yarn-error.log
 # Node module
 node_modules/
 
+public/
+test.js
