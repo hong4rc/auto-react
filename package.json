@@ -4,14 +4,15 @@
     "author": "Hongarc",
     "scripts": {
         "start": "node index.js",
-        "heroku-postbuild": "eslint **/* --fix"
+        "lint": "eslint **/* --fix"
     },
     "main": "index.js",
     "dependencies": {
         "console-control-strings": "^1.1.0",
-        "eslint": "^4.19.1",
-        "express": "^4.16.3",
         "request": "^2.85.0"
+    },
+    "devDependencies": {
+        "eslint": "^4.19.1"
     },
     "engines": {
         "node": "^10.0.0",
