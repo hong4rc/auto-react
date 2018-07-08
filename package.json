@@ -4,7 +4,9 @@
     "author": "Hongarc",
     "scripts": {
         "start": "node index.js",
-        "lint": "eslint **/* --fix"
+        "lint": "eslint **/* --fix",
+        "autocrlf": "crlf --set=CRLF .* * lib/*",
+        "pre-commit": "yarn run autocrlf && yarn run lint"
     },
     "main": "index.js",
     "dependencies": {
@@ -12,7 +14,8 @@
         "request": "^2.85.0"
     },
     "devDependencies": {
-        "eslint": "^4.19.1"
+        "eslint": "^4.19.1",
+        "crlf": "^1.1.1"
     },
     "engines": {
         "node": "^10.0.0",
