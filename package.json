@@ -5,8 +5,7 @@
     "scripts": {
         "start": "node index.js",
         "lint": "eslint **/* --fix",
-        "autocrlf": "crlf --set=CRLF .* * lib/*",
-        "pre-commit": "yarn run autocrlf && yarn run lint"
+        "pre-commit": "yarn run lint"
     },
     "main": "index.js",
     "dependencies": {

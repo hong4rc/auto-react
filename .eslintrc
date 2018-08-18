@@ -31,7 +31,6 @@
         "key-spacing": ["error", {"beforeColon": false, "afterColon": true}],
         "keyword-spacing": ["error", {"before": true, "after": true}],
         "line-comment-position": ["error", {"position": "above"}],
-        "linebreak-style": ["error", "windows"],
         "lines-around-comment": ["error", {"beforeLineComment": true}],
         "max-len": ["warn", {"code": 120, "ignoreComments": true}],
         "new-cap": ["warn", {"capIsNew": false}],
