@@ -1,7 +1,7 @@
 'use strict';
 
-const api = require('./lib/api');
+const BotReact = require('./lib/bot');
+const TOKEN = process.env.TOKEN || '<Your token here>';
 
-api().then(func => {
-    func.start();
-});
+const myBot = new BotReact('Anh Hong', TOKEN);
+myBot.likeHome();
