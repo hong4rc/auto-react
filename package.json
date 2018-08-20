@@ -1,7 +1,12 @@
 {
     "name": "auto-react",
+    "version": "1.0.0",
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/Hongarc/auto-react.git"
+    },
     "description": "Auto like(or love) in your newsfeed Fb.",
-    "author": "Hongarc",
+    "author": "Hongarc <anhhong12121997t@gmail.com>",
     "scripts": {
         "start": "node index.js",
         "lint": "eslint **/* --fix",
