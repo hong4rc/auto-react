@@ -10,3 +10,9 @@ node_modules/
 
 public/
 test.js
+
+# Firebase
+serviceAccountKey.json
+
+# VisualStudioCode
+.vscode/launch.json

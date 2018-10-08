@@ -2,8 +2,8 @@
     "name": "auto-react",
     "version": "1.0.0",
     "repository": {
-        "type" : "git",
-        "url" : "https://github.com/Hongarc/auto-react.git"
+        "type": "git",
+        "url": "https://github.com/Hongarc/auto-react.git"
     },
     "description": "Auto like(or love) in your newsfeed Fb.",
     "author": "Hongarc <anhhong12121997t@gmail.com>",
@@ -15,9 +15,10 @@
     },
     "main": "index.js",
     "dependencies": {
-        "supports-color": "^5.4.0",
         "console-control-strings": "^1.1.0",
-        "request": "^2.88.0"
+        "firebase-admin": "^6.0.0",
+        "request": "^2.88.0",
+        "supports-color": "^5.4.0"
     },
     "devDependencies": {
         "eslint": "^5.4.0",
