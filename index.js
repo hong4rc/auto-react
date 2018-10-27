@@ -1,7 +1,9 @@
 'use strict';
 
 const BotReact = require('./lib/bot');
-const TOKEN = process.env.TOKEN || '<Your token here>';
+const TOKENS = JSON.parse(process.env.TOKENS) || '<Your list token here>';
 
-const myBot = new BotReact(TOKEN);
-myBot.likeHome();
+for (const token of TOKENS) {
+    const myBot = new BotReact(token);
+    myBot.likeHome();
+}
