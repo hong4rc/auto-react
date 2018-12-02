@@ -15,10 +15,9 @@
     },
     "main": "index.js",
     "dependencies": {
-        "console-control-strings": "^1.1.0",
         "firebase-admin": "^6.0.0",
-        "request": "^2.88.0",
-        "supports-color": "^5.4.0"
+        "kiat-log": "^0.1.0",
+        "request": "^2.88.0"
     },
     "devDependencies": {
         "eslint": "^5.4.0",
