@@ -2,20 +2,11 @@
 yarn.lock
 yarn-error.log
 
-#Intellij
-.idea/
-
 # Node module
 node_modules/
 
-public/
+# Test
 test.js
-
-# Firebase
-serviceAccountKey.json
-
-# VisualStudioCode
-.vscode/launch.json
 
 # Env
 .env
