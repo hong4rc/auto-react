@@ -15,7 +15,6 @@
     },
     "main": "index.js",
     "dependencies": {
-        "firebase-admin": "^6.0.0",
         "kiat-log": "^0.1.0",
         "request": "^2.88.0"
     },
