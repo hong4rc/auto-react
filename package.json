@@ -10,7 +10,7 @@
     "license": "MIT",
     "scripts": {
         "start": "node index.js",
-        "lint": "eslint **/* --fix",
+        "lint": "eslint index.js lib/** --fix",
         "pre-commit": "yarn run lint"
     },
     "main": "index.js",
