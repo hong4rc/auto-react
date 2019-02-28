@@ -16,3 +16,6 @@ serviceAccountKey.json
 
 # VisualStudioCode
 .vscode/launch.json
+
+# Env
+.env

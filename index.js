@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 const BotReact = require('./lib/bot');
 const TOKENS = JSON.parse(process.env.TOKENS) || '<Your list token here>';
 
