@@ -15,7 +15,7 @@
     },
     "main": "index.js",
     "dependencies": {
-        "kiat-log": "^0.1.0",
+        "debug": "^4.1.1",
         "node-fetch": "^2.3.0"
     },
     "devDependencies": {
