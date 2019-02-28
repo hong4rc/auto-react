@@ -1,3 +1,3 @@
 {
-    "extends": "kiat"
+  "extends": "airbnb-base"
 }
