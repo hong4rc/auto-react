@@ -1,6 +1,7 @@
 # Yarn
 yarn.lock
 yarn-error.log
+package-lock.json
 
 # Node module
 node_modules/
