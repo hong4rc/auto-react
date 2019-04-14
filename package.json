@@ -6,7 +6,7 @@
     "url": "https://github.com/Hongarc/auto-react.git"
   },
   "description": "Auto like(or love) in your newsfeed Fb.",
-  "author": "Hongarc <anhhong12121997t@gmail.com>",
+  "author": "Hongarc <aqua.hong.97@gmail.com>",
   "license": "MIT",
   "scripts": {
     "start": "node index.js",
