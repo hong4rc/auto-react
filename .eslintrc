@@ -1,0 +1,6 @@
+{
+  "extends": [
+    "plugin:unicorn/recommended",
+    "airbnb-base"
+  ]
+}
