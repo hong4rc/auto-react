@@ -18,7 +18,7 @@ const MAX_TRY_REQUEST = 3;
 const dtTime = 2000;
 const ID_FEED_MAX = 35;
 const newsInOne = process.env.NEWS_IN_FEED || 20;
-const HOME_URL = `/me/home?fields=id,story,from,message,reactions,link,permalink_url,parent_id&limit=${newsInOne}`;
+const HOME_URL = `/me/home?fields=id,message,reactions,permalink_url,parent_id,created_time&limit=${newsInOne}`;
 /* eslint-enable no-unused-vars */
 
 const timeout = (time = 0) => new Promise((resolve) => {
@@ -96,7 +96,10 @@ module.exports = class Bot {
     const idReact = [];
 
     // console.log(data.length);
-    data.forEach(({ id, parent_id: parentId, reactions }) => {
+    data.forEach(({
+      id, parent_id: parentId, reactions,
+      permalink_url: permalinkUrl, created_time: createdTime,
+    }) => {
       // Ignore the shared port
       if (parentId) {
         this.cached.set(parentId, true);
@@ -106,16 +109,21 @@ module.exports = class Bot {
       if (this.cached.has(id)) {
         return;
       }
+      this.cached.set(id, true);
 
       // Liked this post
       if (reactions && reactions.data.some((post) => post.id === this.id)) {
-        this.cached.set(id, true);
-        this.log('Liked', id);
+        this.log('Liked', permalinkUrl);
         return;
       }
 
-      this.cached.set(id, true);
-      idReact.push(id);
+      // 15h
+      if (Date.now() - new Date(createdTime) > 54000000) {
+        this.log('Old  ', permalinkUrl);
+        return;
+      }
+
+      idReact.push({ id, permalinkUrl });
     });
     if (idReact.length > 0) {
       this.likeStack.push(...idReact);
@@ -136,10 +144,10 @@ module.exports = class Bot {
       return;
     }
     const likeLoop = () => {
-      const id = this.likeStack.shift();
+      const { id, permalinkUrl } = this.likeStack.shift();
       this.graph(`/likes?ids=${id}&method=post`)
         .then(() => {
-          this.log('Liked', id);
+          this.log('Like ', permalinkUrl);
         }, () => {
           this.log('error', id);
         });
