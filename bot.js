@@ -4,14 +4,15 @@ const QuickLRU = require('quick-lru');
 process.env.DEBUG = '*';
 const debug = require('debug');
 
+const Like = require('./db/model/like');
 
 const GRAPH_VERSION = '5.0';
 /* eslint-disable no-unused-vars */
 const GRAPH = `https://graph.facebook.com/v${GRAPH_VERSION}`;
 const DF_LENGTH_NAME = 6;
 const START_QUERY = '/me?fields=id,name';
-const TIMEOUT_REACT = 5000;
-const TIMEOUT_FETCH = 15000;
+const TIMEOUT_REACT = process.env.TIMEOUT_REACT || 5000;
+const TIMEOUT_FETCH = process.env.TIMEOUT_FETCH || 15000;
 const MAX_FRIEND_FB = 5000;
 const MAX_PAGE_LIKED = 5000;
 const MAX_TRY_REQUEST = 3;
@@ -19,6 +20,7 @@ const dtTime = 2000;
 const ID_FEED_MAX = 35;
 const newsInOne = process.env.NEWS_IN_FEED || 20;
 const HOME_URL = `/me/home?fields=id,message,reactions,permalink_url,parent_id,created_time&limit=${newsInOne}`;
+const maxSize = 8000;
 /* eslint-enable no-unused-vars */
 
 const timeout = (time = 0) => new Promise((resolve) => {
@@ -38,12 +40,20 @@ module.exports = class Bot {
     this.token = token;
     this.continue = true;
     this.chainHome = null;
+    this.cached = new QuickLRU({ maxSize });
     this.initPromise = this.graph(START_QUERY).then(({ id, name }) => {
       this.id = id;
       this.name = name;
       this.log = debug(name);
-    });
-    this.cached = new QuickLRU({ maxSize: 800 });
+    }).then(() => Like.find({ from: this.id }, ['id_post'], {
+      limit: maxSize,
+      sort: { time: -1 },
+    }).then((posts) => {
+      posts.forEach((post) => {
+        this.cached.set(post.id_post, true);
+      });
+      this.log(this.id, 'loaded', posts.length);
+    }));
     this.likeStack = [];
     this.timeoutId = 0;
   }
@@ -143,14 +153,23 @@ module.exports = class Bot {
     if (!this.continue) {
       return;
     }
-    const likeLoop = () => {
+    const likeLoop = async () => {
       const { id, permalinkUrl } = this.likeStack.shift();
-      this.graph(`/likes?ids=${id}&method=post`)
-        .then(() => {
+      try {
+        await new Like({
+          id_post: id,
+          url: permalinkUrl,
+          from: this.id,
+        }).save();
+        try {
+          await this.graph(`/likes?ids=${id}&method=post`);
           this.log('Like ', permalinkUrl);
-        }, () => {
-          this.log('error', id);
-        });
+        } catch (error) {
+          this.log('error', permalinkUrl);
+        }
+      } catch (_) {
+        this.log('duplicate', permalinkUrl);
+      }
 
       if (this.likeStack.length === 0) {
         // No more avaiable post

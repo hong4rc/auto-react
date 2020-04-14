@@ -13,6 +13,7 @@
     "axios": "^0.19.2",
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
+    "mongoose": "^5.9.9",
     "quick-lru": "^5.0.0"
   },
   "devDependencies": {
