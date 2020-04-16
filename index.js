@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const Bot = require('./bot');
 
-const token = process.env.TOKEN || 'your token here';
+const tokens = (process.env.TOKENS || 'your token here').split(';');
 let tried = 0;
 
 const connect = () => {
@@ -28,7 +28,8 @@ connect()
   .on('disconnected', reconnect)
   .once('open', () => {
     console.log('db connected!!');
-    const me = new Bot(token);
-
-    me.likeHome();
+    tokens.forEach((token) => {
+      const me = new Bot(token);
+      me.likeHome();
+    });
   });
