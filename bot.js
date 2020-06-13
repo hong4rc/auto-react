@@ -31,7 +31,7 @@ module.exports = class Bot {
   /**
    * Create new bot
    * @param {string} token your fb token
-   * @property {boolean} continue avaible to auto react
+   * @property {boolean} continue available to auto react
    * @property {Promise} chainHome promise loop react home
    * @property {QuickLRU} cached cache liked post
    * @property {string[]} likeStack array to
@@ -39,7 +39,7 @@ module.exports = class Bot {
   constructor(token) {
     this.token = token;
     this.continue = true;
-    this.chainHome = null;
+    this.chainHome = undefined;
     this.cached = new QuickLRU({ maxSize });
     this.initPromise = this.graph(START_QUERY).then(({ id, name }) => {
       this.id = id;
@@ -58,24 +58,15 @@ module.exports = class Bot {
     this.timeoutId = 0;
   }
 
-
   static fetch(url) {
     return axios(url)
       .then((response) => response.data);
   }
 
-  graph(query) {
-    let tried = 0;
+  async graph(query) {
     const url = new URL(GRAPH + query);
     url.searchParams.set('access_token', this.token);
-    while (tried < MAX_TRY_REQUEST) {
-      tried += 1;
-      try {
-        return Bot.fetch(url.href);
-      // eslint-disable-next-line no-empty
-      } catch (_) {}
-    }
-    throw new Error('Request > MAX_TRY_REQUEST time:', query);
+    return Bot.fetch(url.href);
   }
 
   likeHome() {
@@ -123,7 +114,7 @@ module.exports = class Bot {
 
       // Liked this post
       if (reactions && reactions.data.some((post) => post.id === this.id)) {
-        this.log('Liked', permalinkUrl);
+        this.log('Liked', permalinkUrl, id);
         return;
       }
 
@@ -147,7 +138,7 @@ module.exports = class Bot {
       return;
     }
     if (this.likeStack.length === 0) {
-      // No more avaiable post
+      // No more available post
       return;
     }
     if (!this.continue) {
@@ -167,12 +158,12 @@ module.exports = class Bot {
         } catch (error) {
           this.log('error', permalinkUrl);
         }
-      } catch (_) {
+      } catch (error) {
         this.log('duplicate', permalinkUrl);
       }
 
       if (this.likeStack.length === 0) {
-        // No more avaiable post
+        // No more available post
         this.timeoutId = 0;
         return;
       }
