@@ -18,16 +18,16 @@
   "author": "Anh Hong <hong4rc@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.20.0",
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
-    "mongoose": "^5.9.18",
+    "mongoose": "^5.10.0",
     "quick-lru": "^5.1.1"
   },
   "devDependencies": {
-    "eslint": "^7.2.0",
+    "eslint": "^7.7.0",
     "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.21.2",
-    "eslint-plugin-unicorn": "^20.1.0"
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-unicorn": "^21.0.0"
   }
 }
