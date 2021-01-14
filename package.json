@@ -22,7 +22,7 @@
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
     "mongoose": "^5.10.0",
-    "quick-lru": "^5.1.1"
+    "quick-lru": "^6.0.0"
   },
   "devDependencies": {
     "eslint": "^7.7.0",
