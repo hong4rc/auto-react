@@ -20,7 +20,7 @@
   "dependencies": {
     "axios": "^0.20.0",
     "debug": "^4.1.1",
-    "dotenv": "^8.2.0",
+    "dotenv": "^9.0.0",
     "mongoose": "^5.10.0",
     "quick-lru": "^5.1.1"
   },
